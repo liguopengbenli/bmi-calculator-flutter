@@ -1,4 +1,8 @@
+import 'package:bmi_calculator/reusable_card.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'Icon_content.dart';
 
 const bottomContainerHeight = 80.0;
 const activeCardColor = Color(0XFF1DE33);
@@ -22,9 +26,12 @@ class _InputPageState extends State<InputPage> {
                 child: Row(
               children: <Widget>[
                 Expanded(
-                  child: ReusableCard(activeCardColor),
+                  child: ReusableCard(activeCardColor,
+                      ContentWidget(FontAwesomeIcons.mars, "'MALE'")),
                 ),
-                Expanded(child: ReusableCard(activeCardColor))
+                Expanded(
+                    child: ReusableCard(activeCardColor,
+                        ContentWidget(FontAwesomeIcons.venus, "'FEMALE'")))
               ],
             )),
             Expanded(child: ReusableCard(activeCardColor)),
@@ -43,24 +50,5 @@ class _InputPageState extends State<InputPage> {
             )
           ],
         ));
-  }
-}
-
-class ReusableCard extends StatelessWidget {
-  ReusableCard(this.cardColor, [this.cardChild]);
-
-  final Color cardColor;
-  final Widget cardChild;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: cardChild,
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: cardColor,
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-    );
   }
 }
