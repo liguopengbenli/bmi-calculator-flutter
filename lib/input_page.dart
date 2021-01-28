@@ -17,26 +17,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleColor = inactiveCardColor;
-  Color femaleColor = inactiveCardColor;
-
-  void updateColor(Gender gender) {
-    if (gender == Gender.male) {
-      if (maleColor == inactiveCardColor) {
-        maleColor = activeCardColor;
-        femaleColor = inactiveCardColor;
-      } else {
-        maleColor = inactiveCardColor;
-      }
-    } else if (gender == Gender.female) {
-      if (femaleColor == inactiveCardColor) {
-        femaleColor = activeCardColor;
-        maleColor = inactiveCardColor;
-      } else {
-        femaleColor = inactiveCardColor;
-      }
-    }
-  }
+  Gender selectedGender;
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +34,13 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        updateColor(Gender.male);
+                        selectedGender = Gender.male;
                       });
                     },
-                    child: ReusableCard(maleColor,
+                    child: ReusableCard(
+                        selectedGender == Gender.male
+                            ? activeCardColor
+                            : inactiveCardColor,
                         ContentWidget(FontAwesomeIcons.mars, "'MALE'")),
                   ),
                 ),
@@ -64,10 +48,13 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        updateColor(Gender.female);
+                        selectedGender = Gender.female;
                       });
                     },
-                    child: ReusableCard(femaleColor,
+                    child: ReusableCard(
+                        selectedGender == Gender.female
+                            ? activeCardColor
+                            : inactiveCardColor,
                         ContentWidget(FontAwesomeIcons.venus, "'FEMALE'")),
                   ),
                 )
