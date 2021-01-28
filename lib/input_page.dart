@@ -7,8 +7,9 @@ import 'Icon_content.dart';
 const bottomContainerHeight = 80.0;
 const activeCardColor = Color(0XFF1D1E33);
 const inactiveCardColor = Color(0XFF111328);
-
 const bottomColor = Color(0XFFEB1555);
+
+enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
   @override
@@ -19,15 +20,15 @@ class _InputPageState extends State<InputPage> {
   Color maleColor = inactiveCardColor;
   Color femaleColor = inactiveCardColor;
 
-  void updateColor(int gender) {
-    if (gender == 1) {
+  void updateColor(Gender gender) {
+    if (gender == Gender.male) {
       if (maleColor == inactiveCardColor) {
         maleColor = activeCardColor;
         femaleColor = inactiveCardColor;
       } else {
         maleColor = inactiveCardColor;
       }
-    } else {
+    } else if (gender == Gender.female) {
       if (femaleColor == inactiveCardColor) {
         femaleColor = activeCardColor;
         maleColor = inactiveCardColor;
@@ -52,7 +53,7 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        updateColor(1);
+                        updateColor(Gender.male);
                       });
                     },
                     child: ReusableCard(maleColor,
@@ -63,7 +64,7 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        updateColor(0);
+                        updateColor(Gender.female);
                       });
                     },
                     child: ReusableCard(femaleColor,
