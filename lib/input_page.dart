@@ -31,33 +31,27 @@ class _InputPageState extends State<InputPage> {
                 child: Row(
               children: <Widget>[
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedGender = Gender.male;
-                      });
-                    },
-                    child: ReusableCard(
-                        selectedGender == Gender.male
-                            ? activeCardColor
-                            : inactiveCardColor,
-                        ContentWidget(FontAwesomeIcons.mars, "'MALE'")),
-                  ),
+                  child: ReusableCard(
+                      selectedGender == Gender.male
+                          ? activeCardColor
+                          : inactiveCardColor,
+                      ContentWidget(FontAwesomeIcons.mars, "'MALE'"), () {
+                    setState(() {
+                      selectedGender = Gender.male;
+                    });
+                  }),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedGender = Gender.female;
-                      });
-                    },
-                    child: ReusableCard(
-                        selectedGender == Gender.female
-                            ? activeCardColor
-                            : inactiveCardColor,
-                        ContentWidget(FontAwesomeIcons.venus, "'FEMALE'")),
-                  ),
-                )
+                  child: ReusableCard(
+                      selectedGender == Gender.female
+                          ? activeCardColor
+                          : inactiveCardColor,
+                      ContentWidget(FontAwesomeIcons.venus, "'FEMALE'"), () {
+                    setState(() {
+                      selectedGender = Gender.female;
+                    });
+                  }),
+                ),
               ],
             )),
             Expanded(child: ReusableCard(activeCardColor)),
