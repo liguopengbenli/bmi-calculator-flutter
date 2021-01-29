@@ -16,6 +16,7 @@ class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   int height = 170;
   int weight = 60;
+  int age = 19;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,21 +116,56 @@ class _InputPageState extends State<InputPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          FloatingActionButton(
-                            backgroundColor: Color(0xFF4C4F5E),
-                            child: Icon(Icons.add, color: Colors.white),
-                          ),
+                          CustomIconButton(FontAwesomeIcons.plus, () {
+                            setState(() {
+                              weight++;
+                            });
+                          }),
                           SizedBox(width: 10),
-                          FloatingActionButton(
-                            backgroundColor: Color(0xFF4C4F5E),
-                            child: Icon(Icons.add, color: Colors.white),
-                          ),
+                          CustomIconButton(FontAwesomeIcons.minus, () {
+                            setState(() {
+                              weight--;
+                            });
+                          }),
                         ],
                       )
                     ],
                   ),
                 )),
-                Expanded(child: ReusableCard(kactiveCardColor))
+                Expanded(
+                  child: ReusableCard(
+                    kactiveCardColor,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'AGE',
+                          style: klabelTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomIconButton(FontAwesomeIcons.plus, () {
+                              setState(() {
+                                age++;
+                              });
+                            }),
+                            SizedBox(width: 10),
+                            CustomIconButton(FontAwesomeIcons.minus, () {
+                              setState(() {
+                                age--;
+                              });
+                            }),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                )
               ],
             )),
             Container(
@@ -140,5 +176,26 @@ class _InputPageState extends State<InputPage> {
             )
           ],
         ));
+  }
+}
+
+class CustomIconButton extends StatelessWidget {
+  CustomIconButton(this.icon, this.onPressed);
+  final IconData icon;
+  final Function onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      shape: CircleBorder(),
+      child: Icon(icon),
+      elevation: 0,
+      fillColor: Color(0xFF4C4F5E),
+      constraints: BoxConstraints.tightFor(
+        width: 56.0,
+        height: 56.0,
+      ),
+      onPressed: onPressed,
+    );
   }
 }
