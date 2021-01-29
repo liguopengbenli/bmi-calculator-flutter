@@ -1,10 +1,12 @@
-import 'package:bmi_calculator/results_page.dart';
-import 'package:bmi_calculator/reusable_card.dart';
+import 'package:bmi_calculator/components/reusable_card.dart';
+import 'package:bmi_calculator/screens/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'Icon_content.dart';
-import 'constants.dart';
+import '../components/Icon_content.dart';
+import '../components/bottom_button.dart';
+import '../components/icon_button.dart';
+import '../constants.dart';
 
 enum Gender { male, female }
 
@@ -169,47 +171,11 @@ class _InputPageState extends State<InputPage> {
                 )
               ],
             )),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ResultsPage()));
-              },
-              child: Container(
-                child: Center(
-                  child: Text(
-                    'CALCULATE',
-                    style: kLargeButtonTextStyle,
-                  ),
-                ),
-                margin: EdgeInsets.only(top: 10.0),
-                padding: EdgeInsets.only(bottom: 20.0),
-                color: kbottomColor,
-                width: double.infinity,
-                height: kbottomContainerHeight,
-              ),
-            )
+            BottomBtn('CALCULATE', () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ResultsPage()));
+            })
           ],
         ));
-  }
-}
-
-class CustomIconButton extends StatelessWidget {
-  CustomIconButton(this.icon, this.onPressed);
-  final IconData icon;
-  final Function onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      shape: CircleBorder(),
-      child: Icon(icon),
-      elevation: 0,
-      fillColor: Color(0xFF4C4F5E),
-      constraints: BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-      onPressed: onPressed,
-    );
   }
 }
